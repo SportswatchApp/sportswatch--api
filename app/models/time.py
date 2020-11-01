@@ -15,4 +15,10 @@ class Time(models.Model):
     time = models.IntegerField(
         verbose_name='Tid sekunder 1/100'
     )
+    reported_by = models.ForeignKey(
+        to='app.User',
+        on_delete=models.SET_NULL,
+        null=True,
+        default=None
+    )
     created_date = models.DateTimeField(auto_now_add=True)

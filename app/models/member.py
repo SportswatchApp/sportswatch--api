@@ -16,5 +16,14 @@ class Member(models.Model):
         auto_now_add=True
     )
 
+    def is_trainee(self):
+        return self.trainee_set.exists()
+
+    def is_coach(self):
+        return self.coach_set.exists()
+
+    def is_admin(self):
+        return self.admin_set.exists()
+
     class Meta:
         unique_together = ('user', 'club',)

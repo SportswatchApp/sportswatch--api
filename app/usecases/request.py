@@ -10,6 +10,7 @@ class Request:
         self.body = {}
         self.is_valid = True
         self.errors = []
+        self.user = None
 
     def from_dict(self, _dict):
         self.body = _dict
@@ -26,6 +27,7 @@ class Request:
 
     def from_django(self, request):
         decoded = request.body.decode('utf-8')
+        self.user = request.user
         try:
             _dict = json.loads(decoded)
             return self.from_dict(_dict)
