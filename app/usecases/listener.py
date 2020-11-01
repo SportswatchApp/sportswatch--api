@@ -17,7 +17,7 @@ class ForbiddenListener:
 
 
 class SuccessListener:
-    def handle_success(self, data):
+    def handle_success(self, data=None):
         raise NotImplementedError()
 
 

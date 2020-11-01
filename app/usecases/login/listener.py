@@ -3,7 +3,7 @@ from app.usecases import listener
 
 class Listener(listener.Listener, listener.SuccessListener):
 
-    def handle_success(self, key):
+    def handle_success(self, key=None):
         self.response = (202, key)
 
     def handle_invalid_credentials(self):
