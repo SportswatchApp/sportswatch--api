@@ -10,10 +10,10 @@ class Club(models.Model):
     )
     created_date = models.DateTimeField(auto_now_add=True)
 
-    DTO = namedtuple("DTO", "id name created_date members")
+    DTO = namedtuple('DTO', 'id name created_date members')
 
     def has_member(self, user):
-        return self.member_set.filter(user=user).exists()
+        return self.member_set.filter(user=user, active=True).exists()
 
     def __dto__(self):
         return Club.DTO(

@@ -15,5 +15,5 @@ class Get:
             listener.handle_forbidden()
             return
 
-        members = club.member_set.all()
+        members = club.member_set.filter(active=True)
         listener.handle_success(Member.__dtolist__(members))

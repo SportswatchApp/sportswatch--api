@@ -16,7 +16,9 @@ class Create:
         club = Club.objects.create(name=name)
         member = Member.objects.create(
             club=club,
-            user=user
+            user=user,
+            active=True,
+            invited_by=None
         )
         Admin.objects.create(
             member=member
