@@ -12,3 +12,15 @@ API back-end for sportswatch
 4. Run `$ python manage.py migrate` to migrate tables to the database. This will create a file `db.sqlite3` which is the database.
 
 To run the API: `$ python manage.py runserver`. Will typically be served on 127.0.0.1:8000
+
+
+## Terminologi
+
+Roles:
+* Administrator
+* Coach (Træner)
+* Trusted person
+* User
+
+Club (Klub)
+
