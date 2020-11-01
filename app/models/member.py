@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 from django.db import models
 
 
@@ -16,6 +18,8 @@ class Member(models.Model):
         auto_now_add=True
     )
 
+    DTO = namedtuple("DTO", "id club_id")
+
     def is_trainee(self):
         return self.trainee_set.exists()
 
@@ -24,6 +28,9 @@ class Member(models.Model):
 
     def is_admin(self):
         return self.admin_set.exists()
+
+    def __dto__(self):
+        pass
 
     class Meta:
         unique_together = ('user', 'club',)

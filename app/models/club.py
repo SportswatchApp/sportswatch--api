@@ -12,6 +12,9 @@ class Club(models.Model):
 
     DTO = namedtuple("DTO", "id name created_date members")
 
+    def has_member(self, user):
+        return self.member_set.filter(user=user).exists()
+
     def __dto__(self):
         return Club.DTO(
             id=self.id,
