@@ -4,6 +4,7 @@ import json
 class Request:
 
     required = tuple()
+    optional = tuple()
 
     def __init__(self) -> None:
         self.body = {}
