@@ -9,7 +9,7 @@ class EndpointMetaData(BaseMetadata):
             'description': view.get_view_description(),
             'required fields': view.request_obj.required,
             'optional fields': view.request_obj.optional,
-            'DTO response': self.fields(view.model),
+            'DTO response': self.fields(view.model) if view.model else {},
         }
 
     def fields(self, model):

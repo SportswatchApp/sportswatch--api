@@ -10,7 +10,7 @@ class UseCaseTestCase(TestCase):
         self.request = None
 
     def create_request(self, fields):
-        raise NotImplementedError()
+        return NotImplementedError()
 
     def run_use_case(self):
         raise NotImplementedError()
@@ -21,11 +21,11 @@ class UseCaseTestCase(TestCase):
     def assertCalled(self, method):
         TestCase().assertTrue(method.called, '\n' + str(method) + '\nExpected: Called\nActual: Not called')
 
-    def assertOnlyCalled(self, method, listener):
-        call_count = len(listener.method_calls)
+    def assertOnlyCalled(self, method):
+        call_count = len(self.listener.method_calls)
         TestCase().assertTrue(method.called and call_count == 1,
                               "\nExpected: Only the method '" + str(method) + "' called"
-                              + '\nActual: The methods ' + str(listener.method_calls) + ' were called')
+                              + '\nActual: The methods ' + str(self.listener.method_calls) + ' were called')
 
     def assertMultipleOnlyCalled(self, *args, listener):
         method_calls = listener.method_calls
