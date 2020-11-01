@@ -1,5 +1,7 @@
 from collections import namedtuple
-
+from .coach import Coach
+from .admin import Admin
+from .trainee import Trainee
 from django.db import models
 
 
@@ -31,7 +33,8 @@ class Member(models.Model):
         auto_now_add=True
     )
 
-    DTO = namedtuple("DTO", "id club date_joined user is_trainee is_coach is_admin")
+    DTO = namedtuple("DTO", "id club date_joined user is_trainee is_coach is_admin active")
+    ROLES = ['admin', 'coach', 'trainee']
 
     def is_trainee(self):
         return self.trainee_set.exists()
@@ -45,6 +48,24 @@ class Member(models.Model):
     def is_pending(self):
         return self.active is False and self.marked_spam is False
 
+    def set_admin(self, set_admin):
+        if set_admin:
+            Admin.objects.get_or_create(member=self)
+        else:
+            Admin.objects.filter(member=self).delete()
+
+    def set_coach(self, set_coach):
+        if set_coach:
+            Coach.objects.get_or_create(member=self)
+        else:
+            Coach.objects.filter(member=self).delete()
+
+    def set_trainee(self, set_trainee):
+        if set_trainee:
+            Trainee.objects.get_or_create(member=self)
+        else:
+            Trainee.objects.filter(member=self).delete()
+
     def __dto__(self):
         return Member.DTO(
             id=self.id,
@@ -56,7 +77,8 @@ class Member(models.Model):
             user=self.user.__dto__(),
             is_trainee=self.is_trainee(),
             is_coach=self.is_coach(),
-            is_admin=self.is_admin()
+            is_admin=self.is_admin(),
+            active=self.active
         )._asdict()
 
     @staticmethod

@@ -11,9 +11,9 @@ class Get:
             listener.handle_not_found()
             return
 
-        if not club.has_member(user):
+        if not club.has_active_member(user):
             listener.handle_forbidden()
             return
 
-        members = club.member_set.filter(active=True)
+        members = club.member_set.all()
         listener.handle_success(Member.__dtolist__(members))

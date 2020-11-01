@@ -34,7 +34,7 @@ class TestCreateClub(UseCaseTestCase):
         self.assertTrue(member.is_admin())
         self.assertTrue(member.active)
         self.assertEqual(self.request.user, member.user)
-        self.assertTrue(club.has_member(member.user))
+        self.assertTrue(club.has_active_member(member.user))
 
     def create_request(self, fields):
         return create_club.Request().from_dict(fields)
