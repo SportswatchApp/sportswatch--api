@@ -22,3 +22,7 @@ The command creates a new use case.
 * `use-case-type` should be camel case ex. `Login`, `Create`, `Edit`, etc.
 * `use-case-name` should be lowercase with underscores ex. `login_member`, `create_new_user`, `edit_club`, etc
 * The `--request` is optional and should be added if the usecase requires data in a request
+
+
+### Documentation
+Endpoints: https://documenter.getpostman.com/view/11478271/TVYM5GDd#055e00ab-f034-4096-80ef-7b5d3cc2ad34
