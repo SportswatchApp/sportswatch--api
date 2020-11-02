@@ -7,7 +7,9 @@ class EndpointMetaData(BaseMetadata):
         return {
             'name': view.get_view_name(),
             'description': view.get_view_description(),
-            'fields': self.fields(view.get_model())
+            'required fields': view.request_obj.required,
+            'optional fields': view.request_obj.optional,
+            'DTO response': self.fields(view.model) if view.model else {},
         }
 
     def fields(self, model):

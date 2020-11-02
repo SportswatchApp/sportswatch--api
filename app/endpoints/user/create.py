@@ -6,6 +6,9 @@ from app.usecases import create_user
 
 class CreateUserEndpoint(PublicMixin):
 
+    model = User
+    request_obj = create_user.Request
+
     def post(self, request):
         _request = create_user.Request().from_django(request)
         listener = create_user.Listener()
@@ -14,6 +17,3 @@ class CreateUserEndpoint(PublicMixin):
             request=request,
             listener=listener
         )
-
-    def get_model(self):
-        return User

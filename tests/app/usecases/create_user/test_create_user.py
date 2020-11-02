@@ -6,9 +6,6 @@ class TestCreateUser(UseCaseTestCase):
     def setUp(self) -> None:
         super().setUp()
 
-    def test_when_(self):
-        pass
-
     def create_request(self, fields):
         pass
 
