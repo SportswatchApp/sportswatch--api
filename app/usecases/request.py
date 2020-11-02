@@ -25,11 +25,13 @@ class Request:
 
         return self
 
-    def from_django(self, request):
+    def from_django(self, request, extras=None):
         decoded = request.body.decode('utf-8')
         self.user = request.user
         try:
             _dict = json.loads(decoded)
+            if extras:
+                _dict = {**_dict, **extras}
             return self.from_dict(_dict)
         except json.decoder.JSONDecodeError:
             self.is_valid = False
