@@ -14,13 +14,11 @@ API back-end for sportswatch
 To run the API: `$ python manage.py runserver`. Will typically be served on 127.0.0.1:8000
 
 
-## Terminologi
+### Create new usecase
+Command `python manage.py usecase use-case-type use-case-name [--request]`
 
-Roles:
-* Administrator
-* Coach (Træner)
-* Trusted person
-* User
+The command creates a new use case. 
 
-Club (Klub)
-
+* `use-case-type` should be camel case ex. `Login`, `Create`, `Edit`, etc.
+* `use-case-name` should be lowercase with underscores ex. `login_member`, `create_new_user`, `edit_club`, etc
+* The `--request` is optional and should be added if the usecase requires data in a request
