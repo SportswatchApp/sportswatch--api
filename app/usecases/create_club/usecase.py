@@ -1,3 +1,5 @@
+from django.db import IntegrityError
+
 from app.models import Club, Member, Admin
 
 
@@ -11,9 +13,27 @@ class Create:
 
         fields = request.body
         name = fields['name']
+        city = fields['city']
+        zip_code = fields['zip_code']
+        country = fields['country']
+        region = fields['region']
         user = request.user
+        try:
+            club = Club.objects.create(
+                name=name,
+                city=city,
+                zip_code=zip_code,
+                country=country,
+                region=region
+            )
+        except IntegrityError as e:
+            _str = str(e)
+            if 'constraint failed' in _str:
+                listener.handle_already_exist()
+            else:
+                listener.handle_database_error()
+            return
 
-        club = Club.objects.create(name=name)
         member = Member.objects.create(
             club=club,
             user=user,
