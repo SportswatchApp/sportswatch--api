@@ -13,6 +13,9 @@ API back-end for sportswatch
 
 To run the API: `$ python manage.py runserver`. Will typically be served on 127.0.0.1:8000
 
+### Sample data
+Run `$ python manage.py makesampledata` before running the server, to set initial sample data
+
 
 ### Create new usecase
 Command `python manage.py usecase use-case-type use-case-name [--request]`
