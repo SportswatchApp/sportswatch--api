@@ -4,7 +4,7 @@ class Listener:
     def handle_invalid_request(self, request):
         self.response = request.get_error()
 
-    def handle_database_error(self, msg):
+    def handle_database_error(self, exception):
         self.response = (500, 'Internal server error')
 
     def get_response(self):

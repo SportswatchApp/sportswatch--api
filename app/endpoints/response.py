@@ -7,7 +7,7 @@ class Response(RestResponse):
         status, data = self._extract_data(listener.get_response(), request)
         if status > 227:
             data = {
-                'details': data,
+                'detail': data,
                 'status': status,
             }
         super().__init__(

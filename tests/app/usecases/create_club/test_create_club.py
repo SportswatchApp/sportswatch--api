@@ -20,7 +20,11 @@ class TestCreateClub(UseCaseTestCase):
 
     def test_can_create_club(self):
         self.request = self.create_request({
-            'name': 'Club'
+            'name': 'Club',
+            'region': 'North',
+            'country': 'Denmark',
+            'zip_code': '9000',
+            'city': 'Aalborg'
         })
         self.request.user = User.objects.create_user(
             username='user',
@@ -35,6 +39,23 @@ class TestCreateClub(UseCaseTestCase):
         self.assertTrue(member.active)
         self.assertEqual(self.request.user, member.user)
         self.assertTrue(club.has_active_member(member.user))
+
+    def test_when_club_already_exist(self):
+        data = {
+            'name': 'Club',
+            'region': 'North',
+            'country': 'Denmark',
+            'zip_code': '9000',
+            'city': 'Aalborg'
+        }
+        Club.objects.create(**data)  # Existing club
+        self.request = self.create_request(data)
+        self.request.user = User.objects.create_user(
+            username='user',
+            password='qwerty'
+        )
+        self.run_use_case()
+        self.assertOnlyCalled(self.listener.handle_already_exist)
 
     def create_request(self, fields):
         return create_club.Request().from_dict(fields)
