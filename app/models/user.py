@@ -30,6 +30,9 @@ class User(AbstractUser):
         except Member.DoesNotExist:
             return False
 
+    def clubs(self):
+        return {m.club for m in self.member_set.all()}
+
     def __dto__(self):
         return User.DTO(
             id=self.id,

@@ -13,6 +13,7 @@ class Club(models.Model):
     city = models.CharField(max_length=35)
     country = models.CharField(max_length=35)
     created_date = models.DateTimeField(auto_now_add=True)
+    trusted_users = models.ManyToManyField(to='app.User')
 
     class Meta:
         unique_together = ('name', 'region', 'zip_code', 'country',)

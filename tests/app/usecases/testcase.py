@@ -2,8 +2,10 @@ from unittest.mock import Mock
 
 from django.test import TestCase
 
+from tests.object_environment.factory import EnvironmentFactory
 
-class UseCaseTestCase(TestCase):
+
+class UseCaseTestCase(TestCase, EnvironmentFactory):
 
     def setUp(self) -> None:
         self.listener = Mock()

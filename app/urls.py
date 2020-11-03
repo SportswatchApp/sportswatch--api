@@ -5,6 +5,7 @@ from app.endpoints.docs import DocsView
 from app.endpoints.member.accept import AcceptMembershipEndpoint
 from app.endpoints.member.list import ListMembersEndpoint
 from app.endpoints.member.put import PutMemberEndpoint
+from app.endpoints.trainee.list import ListTraineesEndpoint
 from app.endpoints.user.create import CreateUserEndpoint
 from app.endpoints.user.login import LoginEndpoint
 from app.endpoints.user.logout import LogoutEndpoint
@@ -26,4 +27,9 @@ urlpatterns += [
 # Members
 urlpatterns += [
     path('members/<int:member_id>/accept/', AcceptMembershipEndpoint.as_view(), name='accepts a membership')
+]
+
+# Trainees
+urlpatterns += [
+    path('trainees/', ListTraineesEndpoint.as_view(), name='list trainees')
 ]
