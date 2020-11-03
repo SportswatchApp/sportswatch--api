@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -6,14 +7,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
+with open('/etc/test.sportswatch.conf.json') as json_file:
+    config = json.load(json_file)
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '__SECRET__'
+SECRET_KEY = config.get('SECRET_KEY')
 SECURE_SSL_REDIRECT = True
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['test.sportswatchapp.dk']
 
