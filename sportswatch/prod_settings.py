@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+from corsheaders.defaults import default_headers
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -134,4 +136,9 @@ CORS_ALLOWED_ORIGINS = [
     "https://test.sportswatchapp.dk",
     "https://sportswatchapp.dk",
     "https://api.sportswatchapp.dk",
+]
+
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'Content-Language',
 ]
