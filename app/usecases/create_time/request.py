@@ -13,7 +13,7 @@ class Request(request.Request):
                     'da': 'Tiden skal angives i 100-dele større end 0',
                     'en': 'Time must be provided as a positive integer in 1/100'
                 })
-        except TypeError:
+        except (TypeError, ValueError):
             self.errors.append((
                 400, 'Time must be provided as an integer'
             ))

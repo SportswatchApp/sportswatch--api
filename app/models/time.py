@@ -22,3 +22,6 @@ class Time(models.Model):
         default=None
     )
     created_date = models.DateTimeField(auto_now_add=True)
+
+    def __dto__(self):
+        return self

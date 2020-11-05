@@ -33,6 +33,9 @@ class User(AbstractUser):
     def clubs(self):
         return {m.club for m in self.member_set.all()}
 
+    def can_register_for(self, trainee):
+        return False
+
     def __dto__(self):
         return User.DTO(
             id=self.id,
