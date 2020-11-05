@@ -13,7 +13,8 @@ class MakeSampleData:
         'members.json',
         'coaches.json',
         'trainees.json',
-        'admins.json'
+        'admins.json',
+        'categories.json'
     ]
     path = 'tests/media/sample_data'
 
