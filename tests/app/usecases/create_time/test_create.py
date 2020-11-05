@@ -27,7 +27,12 @@ class TestCreateTime(UseCaseTestCase):
         })
 
     def create_request(self, fields):
-        return create_time.Request().from_dict(fields)
+        return create_time.Request().from_dict(
+            {**{
+                'time': 100,
+                'trainee_id': 
+            }, **fields}
+        )
 
     def run_use_case(self):
         create_time.Create.create(self.request, self.listener)

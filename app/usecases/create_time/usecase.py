@@ -1,6 +1,6 @@
 from django.db import IntegrityError
 
-from app.models import Time
+from app.models import Time, Trainee
 
 
 class Create:
@@ -16,6 +16,20 @@ class Create:
         trainee_id = fields['trainee_id']
         category_id = fields['category_id']
         reported_by = request.user
+
+        try:
+            trainee = Trainee.objects.get(pk=trainee_id)
+        except Trainee.DoesNotExist:
+            listener.handle_trainee_not_found()
+            return
+
+        if not reported_by.can_register_for(trainee):
+            listener.handle_forbidden()
+            return
+
+        if not trainee.member.club.has_category(category_id):
+            listener.handle_illegal_category()
+            return
 
         try:
             time = Time.objects.create(
