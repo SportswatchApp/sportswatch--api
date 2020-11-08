@@ -6,7 +6,8 @@ from app.endpoints.member.accept import AcceptMembershipEndpoint
 from app.endpoints.member.list import ListMembersEndpoint
 from app.endpoints.member.put import PutMemberEndpoint
 from app.endpoints.trainee.list import ListTraineesEndpoint
-from app.endpoints.user.create import CreateUserEndpoint
+from app.endpoints.user.get import GetUserEndpoint
+from app.endpoints.user.users import UsersEndpoint
 from app.endpoints.user.login import LoginEndpoint
 from app.endpoints.user.logout import LogoutEndpoint
 
@@ -14,7 +15,8 @@ urlpatterns = [
     path('', DocsView.as_view(), name='docs'),
     path('login/', LoginEndpoint.as_view(), name='login endpoint'),
     path('logout/', LogoutEndpoint.as_view(), name='logout endpoint'),
-    path('users/', CreateUserEndpoint.as_view(), name='create user endpoint')
+    path('users/', UsersEndpoint.as_view(), name='create user endpoint'),
+    path('user/', GetUserEndpoint.as_view(), name='create user endpoint'),
 ]
 
 # Club
