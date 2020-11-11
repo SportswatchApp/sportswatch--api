@@ -3,6 +3,9 @@ from app.usecases import request
 
 class Request(request.Request):
 
+    required = ('time', 'trainee_id', 'category_id',)
+    optional = ('created_date',)
+
     def validate(self):
         time = self.body['time']
         try:

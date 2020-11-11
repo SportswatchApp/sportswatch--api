@@ -36,6 +36,7 @@ class Request(request.Request):
 
         if not self.body['country']:
             self.errors.append({
+                'status': 400,
                 'da': 'Land skal udfyldes',
                 'en': 'Coyntry can not be empty'
             })

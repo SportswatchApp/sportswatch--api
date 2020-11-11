@@ -29,6 +29,9 @@ class UseCaseTestCase(TestCase, EnvironmentFactory):
                               "\nExpected: Only the method '" + str(method) + "' called"
                               + '\nActual: The methods ' + str(self.listener.method_calls) + ' were called')
 
+    def get_query_set(self):
+        return self.listener.handle_success.call_args[0][0]
+
     def assertMultipleOnlyCalled(self, *args, listener):
         method_calls = listener.method_calls
         call_count = len(method_calls)

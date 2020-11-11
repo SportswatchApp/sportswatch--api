@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 from django.db import models
 
 
@@ -23,5 +25,14 @@ class Time(models.Model):
     )
     created_date = models.DateTimeField(auto_now_add=True)
 
+    DTO = namedtuple('DTO', 'id trainee category time reported_by created_date')
+
     def __dto__(self):
-        return self
+        return Time.DTO(
+            id=self.id,
+            trainee={'id': self.trainee.id},
+            category={'id': self.category.id, 'name': self.category.name},
+            time=self.time,
+            reported_by={'id': self.reported_by.id},
+            created_date=self.created_date
+        )._asdict()

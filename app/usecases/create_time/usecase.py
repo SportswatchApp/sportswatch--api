@@ -1,6 +1,6 @@
 from django.db import IntegrityError
 
-from app.models import Time, Trainee
+from app.models import Time, Trainee, Category
 
 
 class Create:
@@ -27,7 +27,7 @@ class Create:
             listener.handle_forbidden()
             return
 
-        if not trainee.member.club.has_category(category_id):
+        if not Category.objects.filter(club=trainee.member.club, pk=category_id).exists():
             listener.handle_illegal_category()
             return
 
