@@ -153,9 +153,6 @@ class TestListTrainees(UseCaseTestCase):
     def run_use_case(self):
         list_trainees.List.list(self.request, self.listener)
 
-    def get_query_set(self):
-        return self.listener.handle_success.call_args[0][0]
-
     def _create_trainees(self, club, amt):
         return [self.Trainee.create(club=club) for i in range(amt)]
 
@@ -168,7 +165,7 @@ class TestListTrainees(UseCaseTestCase):
         return trainees
 
     def _create_trainees_with_times(self, amt):
-        cat = Category.objects.create(name='c')
+        cat = Category.objects.create(name='c', club=self.member.club)
         trainees = []
         for i in range(amt):
             trainee = self.Trainee.create(club=self.member.club)

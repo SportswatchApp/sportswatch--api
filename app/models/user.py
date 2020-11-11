@@ -33,6 +33,15 @@ class User(AbstractUser):
     def clubs(self):
         return {m.club for m in self.member_set.all()}
 
+    def can_register_for(self, trainee):
+        clubs = self.clubs()
+        if trainee.member.club in clubs:
+            return True
+        elif trainee.member.club.trusted_users.filter(pk=self.pk).exists():
+            return True
+        else:
+            return False
+
     def __dto__(self):
         return User.DTO(
             id=self.id,
