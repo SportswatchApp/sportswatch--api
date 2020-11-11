@@ -1,7 +1,6 @@
 from django.urls import path
 
 from app.endpoints.club.create import CreateClubEndpoint
-from app.endpoints.docs import DocsView
 from app.endpoints.member.accept import AcceptMembershipEndpoint
 from app.endpoints.member.list import ListMembersEndpoint
 from app.endpoints.member.put import PutMemberEndpoint
@@ -13,7 +12,6 @@ from app.endpoints.user.login import LoginEndpoint
 from app.endpoints.user.logout import LogoutEndpoint
 
 urlpatterns = [
-    path('', DocsView.as_view(), name='docs'),
     path('login/', LoginEndpoint.as_view(), name='login endpoint'),
     path('logout/', LogoutEndpoint.as_view(), name='logout endpoint'),
     path('users/', UsersEndpoint.as_view(), name='create user endpoint'),
