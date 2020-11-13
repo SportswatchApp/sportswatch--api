@@ -81,6 +81,21 @@ class Member(models.Model):
             }
         )._asdict()
 
+    def __dto_no_user__(self):
+        return Member.DTO(
+            id=self.id,
+            club_id=self.club_id,
+            date_joined=self.date_joined,
+            user={'id': self.user.id},
+            is_trainee=self.is_trainee(),
+            is_coach=self.is_coach(),
+            is_admin=self.is_admin(),
+            active=self.active,
+            links={
+                'club': '/api/v1/club/' + str(self.club_id) + '/'
+            }
+        )._asdict()
+
     @staticmethod
     def __dtolist__(members):
         return [m.__dto__() for m in members]
