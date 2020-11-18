@@ -37,3 +37,9 @@ class Club(models.Model):
             created_date=self.created_date,
             members={'link': '/api/v1/club/' + str(self.id) + '/members/'}
         )._asdict()
+
+    @staticmethod
+    def __dtolist__(clubs):
+        return {
+            'clubs': [c.__dto__() for c in clubs]
+        }

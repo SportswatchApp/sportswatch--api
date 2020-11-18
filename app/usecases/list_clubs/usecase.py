@@ -5,4 +5,4 @@ class List:
 
     @staticmethod
     def list(listener):
-        listener.handle_success([c.__dto__() for c in Club.objects.all()])
+        listener.handle_success(Club.__dtolist__(Club.objects.all()))
