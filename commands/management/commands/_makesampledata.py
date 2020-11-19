@@ -16,7 +16,7 @@ class MakeSampleData:
         'admins.json',
         'categories.json'
     ]
-    path = 'tests/media/sample_data'
+    path = 'tests/_media/sample_data'
 
     def make(self, stdout, style):
         if settings.DEBUG is False:

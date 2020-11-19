@@ -1,0 +1,16 @@
+[
+  {
+    "model": "app.trainee",
+    "pk": 1,
+    "fields": {
+      "member_id": 2
+    }
+  },
+  {
+    "model": "app.trainee",
+    "pk": 1,
+    "fields": {
+      "member_id": 4
+    }
+  }
+]
