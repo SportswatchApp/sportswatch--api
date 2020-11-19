@@ -1,0 +1,98 @@
+[
+  {
+    "model": "app.User",
+    "pk": 1,
+    "fields": {
+      "date_joined": "2020-07-04 09:47:33.944647+00:00",
+      "last_login": "2020-07-04 09:47:33.944647+00:00",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "first_name": "Svitlana",
+      "last_name": "Pedersen",
+      "email": "svitlana@perdersen.com",
+      "username": "svitlana@perdersen.com",
+      "password": "pbkdf2_sha256$216000$lSF40hAU0RsI$Yp0X/2hEGAtRCozDJ4xizTt8RMjKlb7TqOQAx9n57u0="
+    }
+  },
+  {
+    "model": "app.User",
+    "pk": 2,
+    "fields": {
+      "date_joined": "2020-07-04 09:47:33.944647+00:00",
+      "last_login": "2020-07-04 09:47:33.944647+00:00",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "first_name": "Tobias",
+      "last_name": "Dybdahl",
+      "email": "tobias@dybdahl.com",
+      "username": "tobias@dybdahl.com",
+      "password": "pbkdf2_sha256$216000$lSF40hAU0RsI$Yp0X/2hEGAtRCozDJ4xizTt8RMjKlb7TqOQAx9n57u0="
+    }
+  },
+  {
+    "model": "app.User",
+    "pk": 3,
+    "fields": {
+      "date_joined": "2020-07-04 09:47:33.944647+00:00",
+      "last_login": "2020-07-04 09:47:33.944647+00:00",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "first_name": "Ruslan",
+      "last_name": "Hruzda",
+      "email": "ruslan@Hruzda.com",
+      "username": "ruslan@Hruzda.com",
+      "password": "pbkdf2_sha256$216000$lSF40hAU0RsI$Yp0X/2hEGAtRCozDJ4xizTt8RMjKlb7TqOQAx9n57u0="
+    }
+  },
+  {
+    "model": "app.User",
+    "pk": 4,
+    "fields": {
+      "date_joined": "2020-07-04 09:47:33.944647+00:00",
+      "last_login": "2020-07-04 09:47:33.944647+00:00",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "first_name": "Aksel",
+      "last_name": "Koldkjaer",
+      "email": "aksel@koldkjaer.com",
+      "username": "aksel@koldkjaer.com",
+      "password": "pbkdf2_sha256$216000$lSF40hAU0RsI$Yp0X/2hEGAtRCozDJ4xizTt8RMjKlb7TqOQAx9n57u0="
+    }
+  },
+  {
+    "model": "app.User",
+    "pk": 5,
+    "fields": {
+      "date_joined": "2020-07-04 09:47:33.944647+00:00",
+      "last_login": "2020-07-04 09:47:33.944647+00:00",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "first_name": "Carl Emil",
+      "last_name": "Jernov",
+      "email": "carlemil@jernov.com",
+      "username": "carlemil@jernov.com",
+      "password": "pbkdf2_sha256$216000$lSF40hAU0RsI$Yp0X/2hEGAtRCozDJ4xizTt8RMjKlb7TqOQAx9n57u0="
+    }
+  },
+  {
+    "model": "app.User",
+    "pk": 6,
+    "fields": {
+      "date_joined": "2020-07-04 09:47:33.944647+00:00",
+      "last_login": "2020-07-04 09:47:33.944647+00:00",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "first_name": "Peter",
+      "last_name": "Sørensen",
+      "email": "peter@sorensen.com",
+      "username": "peter@sorensen.com",
+      "password": "pbkdf2_sha256$216000$lSF40hAU0RsI$Yp0X/2hEGAtRCozDJ4xizTt8RMjKlb7TqOQAx9n57u0="
+    }
+  }
+]

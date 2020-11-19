@@ -1,0 +1,16 @@
+[
+  {
+    "model": "app.coach",
+    "pk": 1,
+    "fields": {
+      "member_id": 2
+    }
+  },
+  {
+    "model": "app.coach",
+    "pk": 2,
+    "fields": {
+      "member_id": 3
+    }
+  }
+]

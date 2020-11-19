@@ -1,5 +1,7 @@
 from unittest import mock
+from unittest.mock import Mock
 
+from django.db import IntegrityError
 from app.models import Category, User, Time
 from app.usecases import create_time
 from tests.app.usecases.testcase import UseCaseTestCase
@@ -52,6 +54,15 @@ class TestCreateTime(UseCaseTestCase):
         self.request.user = user
         self.run_use_case()
         self.assertOnlyCalled(self.listener.handle_illegal_category)
+
+    def test_when_database_error(self):
+        self.request = self.create_request({})
+        user = self.Trainee.create(club=self.club).member.user
+        self.request.user = user
+        with mock.patch.object(Time.objects, 'create') as e:
+            e.side_effect = Mock(side_effect=IntegrityError)
+            self.run_use_case()
+        self.assertOnlyCalled(self.listener.handle_database_error)
 
     def test_can_create_new_time_Success(self):
         self.request = self.create_request({})

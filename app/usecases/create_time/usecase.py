@@ -40,5 +40,4 @@ class Create:
             )
             listener.handle_success(time.__dto__())
         except IntegrityError as e:
-            _str = str(e)
-            print(_str)
+            listener.handle_database_error(e)

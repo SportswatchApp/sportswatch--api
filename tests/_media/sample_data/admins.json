@@ -1,0 +1,9 @@
+[
+  {
+    "model": "app.admin",
+    "pk": 1,
+    "fields": {
+      "member_id": 1
+    }
+  }
+]
