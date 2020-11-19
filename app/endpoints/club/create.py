@@ -6,9 +6,6 @@ from app.usecases import create_club
 
 class CreateClubEndpoint(AuthMixin):
 
-    model = Club
-    request_obj = create_club.Request
-
     def post(self, request):
         _request = create_club.Request().from_django(request)
         listener = create_club.Listener()
