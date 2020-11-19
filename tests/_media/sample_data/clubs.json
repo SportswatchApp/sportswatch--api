@@ -1,0 +1,26 @@
+[
+  {
+    "model": "app.club",
+    "pk": 1,
+    "fields": {
+      "name": "Springteam Nordjylland",
+      "created_date": "2020-07-04 09:47:33.944647+00:00",
+      "city": "Hjørring",
+      "zip_code": 9800,
+      "country": "Denmark",
+      "region": "Nordjylland"
+    }
+  },
+  {
+    "model": "app.club",
+    "pk": 2,
+    "fields": {
+      "name": "Gym Aalborg",
+      "created_date": "2020-07-04 09:47:33.944647+00:00",
+      "city": "Aalborg",
+      "zip_code": 9000,
+      "country": "Denmark",
+      "region": "Nordjylland"
+    }
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "model": "app.member",
+    "pk": 1,
+    "fields": {
+      "club_id": 1,
+      "user_id": 1,
+      "date_joined": "2020-07-04 09:47:33.944647+00:00",
+      "active": true,
+      "invited_by": null,
+      "marked_spam": false
+    }
+  },
+  {
+    "model": "app.member",
+    "pk": 2,
+    "fields": {
+      "club_id": 1,
+      "user_id": 2,
+      "date_joined": "2020-07-04 09:47:33.944647+00:00",
+      "active": true,
+      "invited_by": null,
+      "marked_spam": false
+    }
+  },
+  {
+    "model": "app.member",
+    "pk": 3,
+    "fields": {
+      "club_id": 1,
+      "user_id": 3,
+      "date_joined": "2020-07-04 09:47:33.944647+00:00",
+      "active": true,
+      "invited_by": null,
+      "marked_spam": false
+    }
+  },
+  {
+    "model": "app.member",
+    "pk": 4,
+    "fields": {
+      "club_id": 1,
+      "user_id": 4,
+      "date_joined": "2020-07-04 09:47:33.944647+00:00",
+      "active": true,
+      "invited_by": null,
+      "marked_spam": false
+    }
+  }
+]
