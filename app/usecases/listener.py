@@ -10,6 +10,12 @@ class Listener:
     def get_response(self):
         return self.response
 
+    def detail_maker(self, msg: str, status: int):
+        return {
+            'status': status,
+            'detail': msg
+        }
+
 
 class ForbiddenListener:
     def handle_forbidden(self, data=None):
