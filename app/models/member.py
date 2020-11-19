@@ -33,7 +33,7 @@ class Member(models.Model):
         auto_now_add=True
     )
 
-    DTO = namedtuple("DTO", "id club_id date_joined user is_trainee is_coach is_admin active links")
+    DTO = namedtuple("DTO", "id club date_joined user is_trainee is_coach is_admin active links")
     ROLES = ['admin', 'coach', 'trainee']
 
     def is_trainee(self):
@@ -69,9 +69,30 @@ class Member(models.Model):
     def __dto__(self):
         return Member.DTO(
             id=self.id,
-            club_id=self.club_id,
+            club={
+                'id': self.club_id,
+                'name': self.club.name
+            },
             date_joined=self.date_joined,
             user=self.user.__dto__(),
+            is_trainee=self.is_trainee(),
+            is_coach=self.is_coach(),
+            is_admin=self.is_admin(),
+            active=self.active,
+            links={
+                'club': '/api/v1/club/' + str(self.club_id) + '/'
+            }
+        )._asdict()
+
+    def __dto_no_user__(self):
+        return Member.DTO(
+            id=self.id,
+            club={
+                'id': self.club_id,
+                'name': self.club.name
+            },
+            date_joined=self.date_joined,
+            user={'id': self.user.id},
             is_trainee=self.is_trainee(),
             is_coach=self.is_coach(),
             is_admin=self.is_admin(),

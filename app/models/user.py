@@ -8,7 +8,7 @@ from .member import Member
 class User(AbstractUser):
     pass
 
-    DTO = namedtuple('DTO', 'id email first_name last_name date_joined')
+    DTO = namedtuple('DTO', 'id email first_name last_name date_joined members')
 
     def admin_of(self, club):
         try:
@@ -42,11 +42,18 @@ class User(AbstractUser):
         else:
             return False
 
+    def members(self, only_active=True):
+        if only_active:
+            return self.member_set.filter(active=True)
+        else:
+            return self.member_set.all()
+
     def __dto__(self):
         return User.DTO(
             id=self.id,
             email=self.email,
             first_name=self.first_name,
             last_name=self.last_name,
-            date_joined=self.date_joined
+            date_joined=self.date_joined,
+            members=[m.__dto_no_user__() for m in self.members()]
         )._asdict()
