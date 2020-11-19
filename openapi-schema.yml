@@ -1,0 +1,278 @@
+openapi: 3.0.2
+
+info:
+  title: 'Sportswatch API'
+  description: 'The API ...'
+  version: '0.0.1'
+
+tags:
+  - name: User
+    description: Endpoints for user
+  - name: Club
+    description: Endpoints for club
+
+components:
+  schemas:
+    User:
+      properties:
+        id:
+          type: integer
+          example: 1
+        email:
+          type: string
+          example: test@test.com
+        first_name:
+          type: string
+          example: John
+        last_name:
+          type: string
+          example: Doe
+        date_joined:
+          type: string
+          example: 2020-11-03T11:37:12.361813Z
+    Login:
+      properties:
+        token:
+          type: string
+        created:
+          type: string
+          example: 2020-11-03T11:32:41.678187Z
+
+    Club:
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: GymClub
+        region:
+          type: string
+          example: Nordjylland
+        zip_code:
+          type: string
+          example: 9000
+        city:
+          type: string
+          example: Aalborg
+        country:
+          type: string
+          example: Danmark
+        created_date:
+          type: string
+          example: 2020-11-03T12:09:21.146656Z
+        members:
+          type: object
+          properties:
+            link:
+              type: string
+              example: /api/v1/club/1/members/
+
+
+paths:
+  /api/v1/login/:
+    post:
+      operationId: Login
+      description: Login a user. Returns a token for authentication.
+      parameters:
+        - in: header
+          name: Content-Langauge
+          description: Response language
+          schema:
+            type: string
+            example: [ 'da', 'en' ]
+          required: false
+      responses:
+        '202':
+          description: Logged in
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+        '401':
+          description: Invalid credentials
+      tags:
+        - User
+
+
+
+  /api/v1/logout/:
+    post:
+      operationId: Logout
+      description: Logs a user out from the system.
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: Content-Langauge
+          description: Response language
+          schema:
+            type: string
+            example: [ "da", "en" ]
+          required: false
+
+      responses:
+        '205':
+          description: Log out success.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: User logged out
+        '401':
+          description: Invalid credentials
+      tags:
+        - User
+
+
+
+  /api/v1/users/:
+    post:
+      operationId: Create user
+      description: Create a new user
+      tags:
+        - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: test@test.com
+                first_name:
+                  type: string
+                  example: John
+                last_name:
+                  type: string
+                  exampe: Doe
+                password:
+                  type: string
+                  example: qwerty12
+                conf_password:
+                  type: string
+                  example: qwerty12
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '409':
+          description: Email aleady in use
+        '400':
+          description: Validation error
+
+
+
+  /api/v1/user/:
+    get:
+      operationId: Get user
+      description: Returns the user equals to the given token
+      tags:
+        - User
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: User
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Invalid token
+
+
+
+  /api/v1/club/:
+    post:
+      operationId: Create club
+      tags:
+        - Club
+      description: Creates a new club. The user creating the club will be added as an administrator of the club.
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          schema:
+            type: string
+          required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Club'
+        '409':
+          description: The club already exist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: GymClub
+                region:
+                  type: string
+                  example: Nordjylland
+                zip_code:
+                  type: string
+                  example: 9000
+                city:
+                  type: string
+                  example: Aalborg
+                country:
+                  type: string
+                  example: Danmark
+              required:
+                - name
+                - region
+                - zip_code
+                - city
+                - country
+
+
+
+  /api/v1/clubs/:
+    get:
+      operationId: List clubs
+      description: Returns all clubs
+      tags:
+        - Club
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: All clubs
+          content:
+            application/json:
+              schema:
+                properties:
+                  clubs:
+                    type: array
