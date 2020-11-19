@@ -1,16 +1,9 @@
 from unittest import mock
-
-from django.test import TestCase
-from django.test import client
-
 from app.usecases.create_user import Listener
+from tests.app.endpoints.testcase import EndpointTestCase
 
 
-class TestCreateUserEndpoint(TestCase):
-
-    def setUp(self) -> None:
-        client.MULTIPART_CONTENT = 'application/json'
-        self.client = client.Client()
+class TestCreateUserEndpoint(EndpointTestCase):
 
     def test_when_no_data_provided_Should_get_bad_request(self):
         response = self.client.post('/api/v1/users/')

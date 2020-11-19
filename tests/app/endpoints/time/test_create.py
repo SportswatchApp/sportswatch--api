@@ -1,18 +1,13 @@
 from unittest import mock
 
-from django.test import TestCase
 from django.test import client
 from parameterized import parameterized
 
 from app.usecases import create_time
-from tests.app.endpoints.api_client import ApiClient
+from tests.app.endpoints.testcase import EndpointTestCase
 
 
-class TestCreateTimeEndpoint(TestCase):
-
-    def setUp(self) -> None:
-        client.MULTIPART_CONTENT = 'application/json'
-        self.client = ApiClient()
+class TestCreateTimeEndpoint(EndpointTestCase):
 
     def test_when_user_not_logged_in_Should_get_401(self):
         self.client = client.Client()

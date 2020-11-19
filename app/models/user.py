@@ -48,6 +48,12 @@ class User(AbstractUser):
         else:
             return self.member_set.all()
 
+    def is_member_of(self, club):
+        if isinstance(club, int):
+            return self.member_set.filter(club_id=club).exists()
+        else:
+            return self.member_set.filter(club=club).exists()
+
     def __dto__(self):
         return User.DTO(
             id=self.id,
