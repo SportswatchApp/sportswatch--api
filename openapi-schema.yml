@@ -1,8 +1,39 @@
 openapi: 3.0.2
 
+servers:
+  - url: http://127.0.0.1:8000/
+    description: localhost
+  - url: https://test.sportswatchapp.dk/
+    description: Development server (Might be unavailable)
+  - url: https://api.sportswatchapp.dk/
+    description: Production server
+
 info:
   title: 'Sportswatch API'
-  description: 'The API ...'
+  description: "This is an open API for https://sportswatchapp.dk/
+               <h5>Endpoints with request body</h5>
+               <ul>
+                <li>All bodies should be provided in `application/json` format</li>
+                <li>All requests with a body can respond with a `400 Bad Request` and is not described
+                in the endpoints. However, an appropriate message is returned</li>
+               </ul>
+               <h5>Endpoints with authorization</h5>
+               <ul>
+                <li>Endpoints with authorization are marked in the documentation in the HEADER
+                PARAMETERS</li>
+                <li>Place the token (returned from `/login/` endpoint) in the header.
+                Key: `Authorization`, Value: `Token <TOKEN>`</li>
+               </ul>
+               <h5>Request rates</h5>
+               Please do not exceed these request rates<br/><br/>
+               <b>Development and production server</b>
+               <ul>
+                <li>50 requests/day for unauthorized endpoints</li>
+                <li>500 requests/day for authorized endpoints</li>
+                <li>2 seconds between each request</li>
+               </ul>
+               Exceeding these will block your IP for the rest of the day.
+               "
   version: '1.0.0-BETA'
 
 tags:
