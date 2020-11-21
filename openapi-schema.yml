@@ -3,13 +3,21 @@ openapi: 3.0.2
 info:
   title: 'Sportswatch API'
   description: 'The API ...'
-  version: '0.0.1'
+  version: '1.0.0-BETA'
 
 tags:
   - name: User
-    description: Endpoints for user
+    description: Endpoints for users
   - name: Club
-    description: Endpoints for club
+    description: Endpoints for clubs
+  - name: Member
+    description: Endpoints for members
+  - name: Trainee
+    description: Endpoints for trainees
+  - name: Time
+    description: Endpoints for times
+  - name: Category
+    description: Endpoints for categories
 
 components:
   schemas:
@@ -68,6 +76,77 @@ components:
               type: string
               example: /api/v1/club/1/members/
 
+    Time:
+      properties:
+        id:
+          type: integer
+          example: 1
+        trainee:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+        category:
+          type:
+            object
+          properties:
+            id:
+              type: integer
+              example: 1
+            name:
+              type: string
+              example: main category
+        time:
+          type: integer
+          example: 1750
+        reported_by:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 2
+        created_date:
+          type: string
+          example: 2020-11-03T12:09:21.146656Z
+
+
+    Member:
+      properties:
+        id:
+          type: int
+          example: 1
+        club:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            name:
+              type: string
+              example: GymClub
+        date_joined:
+          type: string
+          example: 2020-11-03T12:09:21.146656Z
+        user:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+        is_trainee:
+          type: boolean
+          example: true
+        is_coach:
+          type: boolean
+          example: false
+        is_admin:
+          type: boolean
+          example: false
+        active:
+          type: boolean
+          example: false
+
 
 paths:
   /api/v1/login/:
@@ -80,7 +159,7 @@ paths:
           description: Response language
           schema:
             type: string
-            example: [ 'da', 'en' ]
+            enum: [da, en]
           required: false
       responses:
         '202':
@@ -106,13 +185,14 @@ paths:
           description: Bearer token
           schema:
             type: string
+            example: Token <Token>
           required: true
         - in: header
           name: Content-Langauge
           description: Response language
           schema:
             type: string
-            example: [ "da", "en" ]
+            enum: [da, en]
           required: false
 
       responses:
@@ -187,6 +267,7 @@ paths:
           description: Bearer token
           schema:
             type: string
+            example: Token <Token>
           required: true
 
       responses:
@@ -213,6 +294,7 @@ paths:
           description: Bearer token
           schema:
             type: string
+            example: Token <Token>
           required: true
       responses:
         '201':
@@ -266,6 +348,7 @@ paths:
           description: Bearer token
           schema:
             type: string
+            example: Token <Token>
           required: true
       responses:
         '200':
@@ -276,3 +359,265 @@ paths:
                 properties:
                   clubs:
                     type: array
+
+
+
+  /api/v1/club/{club_id}/apply/:
+    post:
+      operationId: Apply membership to club
+      description: Apply membership to the given club for the authorized user.
+                   When `200 OK` a member is created with `member.active = False` and `member.is_trainee = True`.
+                   The user identified by provided `<Token>` will be the one applying for membership.
+      tags:
+        - Club
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          schema:
+            type: string
+            example: Token <Token>
+          required: true
+        - in: header
+          name: Content-Langauge
+          description: Response language
+          schema:
+            type: string
+            enum: [da, en]
+          required: false
+        - in: path
+          name: club_id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: Identifier of the club
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '208':
+          description: Application already reported
+        '404':
+          description: Club not found
+
+
+
+  /api/v1/club/:club_id/members/:
+    get:
+      operationId: Get members
+      description: Get all members of a given a club.
+      tags:
+        - Member
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          schema:
+            type: string
+            example: Token <Token>
+          required: true
+        - in: path
+          name: club_id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: Identifier of the club
+      responses:
+        '200':
+          description: Members of club
+          content:
+            application/json:
+              schema:
+                properties:
+                  clubs:
+                    type: array
+        '403':
+          description: You do not have permission to see these members
+        '404':
+          description: Club not found
+
+
+
+  '/api/v1/club/:club_id/members/:user_id/':
+    put:
+      operationId: Put member
+      description: "Updates a member if already added or creates new if not found<br/><br/>
+                   Only coaches and admins can use this endpoint. For trainees `403 Forbidden` will be returned.<br/><br/>
+                   <h5>Admin</h5>
+                   Will get success on any roles `[\"trainee\", \"admin\", \"coach\"]`<br/><br/>
+                   <h5>Coach</h5>
+                   Will get succes on roles `[\"trainee\", \"coach\"]`
+                   "
+      tags:
+        - Member
+      parameters:
+        - in: path
+          name: club_id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: Identifier of the club
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: Identifier of user
+        - in: header
+          name: Authorization
+          description: Bearer token
+          schema:
+            type: string
+            example: Token <Token>
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roles:
+                  type: array
+                  example: ["trainee", "coach", "admin"]
+                  description: Any combination of `"trainee"`, `"coach"` and `"admin"`
+                  minimum: 1
+                  maximum: 3
+              required:
+                - roles
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '404':
+          description: Club not found || User not found
+        '400':
+          description: Invalid role
+        '403':
+          description: Coaches cannot add admins || Only coaches and admins are allowed to add new members
+
+
+
+  /api/v1/members/{member_id}/accept/:
+    put:
+      operationId: Accept membership
+      description: Accepts a membership for a given member
+      tags:
+        - Member
+      parameters:
+        - in: path
+          name: member_id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: Identifier of the member
+        - in: header
+          name: Authorization
+          description: Bearer token
+          schema:
+            type: string
+            example: Token <Token>
+          required: true
+      responses:
+        '202':
+          description: Accepted
+        '403':
+          description: Forbidden
+
+
+
+  /api/v1/trainees/:
+    get:
+      operationId: List trainees
+      description: Get list of trainees in which a user can register times for
+      tags:
+        - Trainee
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          schema:
+            type: string
+            example: Token <Token>
+          required: true
+        - in: query
+          name: order_by
+          schema:
+            type: string
+            enum: [default, frequently]
+          description: Order of the trainees. `"frequently"` will order by trainees in which
+                       the request user has registered most times for. Most first.
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: Search by full name, email or exact id
+
+      responses:
+        '200':
+          description: Trainees
+          content:
+            application/json:
+              schema:
+                properties:
+                  clubs:
+                    type: array
+
+
+  /api/v1/time/:
+    post:
+      operationId: Create time
+      description: Creates a new time for a trainee
+      tags:
+        - Time
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: integer
+                  example: 1
+                  description: Identifier of category
+                trainee_id:
+                  type: integer
+                  example: 1
+                  description: Identifier of trainee
+                time:
+                  type: integer
+                  example: 1750
+                  description: The time in 100th of a second, i.e 17.50 s = 1750
+              required:
+                - category_id
+                - trainee_id
+                - time
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Time'
+        '403':
+          description: You do not have permission to register times for this trainee
+        '404':
+          description: Category not found || Trainee not found
