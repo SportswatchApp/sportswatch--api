@@ -28,4 +28,4 @@ The command creates a new use case.
 
 
 ### Documentation
-Endpoints: https://documenter.getpostman.com/view/11478271/TVYM5GDd#055e00ab-f034-4096-80ef-7b5d3cc2ad34
+https://sportswatchapp.dk/documentation/
