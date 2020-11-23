@@ -54,6 +54,9 @@ class User(AbstractUser):
         else:
             return self.member_set.filter(club=club).exists()
 
+    def member(self, club):
+        return self.member_set.filter(club=club).first()
+
     def __dto__(self):
         return User.DTO(
             id=self.id,

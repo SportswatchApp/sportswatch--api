@@ -17,8 +17,9 @@ class Apply:
             listener.handle_not_found()
             return
 
-        if user.is_member_of(club):
-            listener.handle_already_applied()
+        member = user.member(club)
+        if member is not None:
+            listener.handle_already_applied(user.member(club).__dto__())
             return
 
         try:
