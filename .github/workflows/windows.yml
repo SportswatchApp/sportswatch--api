@@ -28,6 +28,3 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
-    - name: Check valid documentation
-      run: |
-        python -c 'import yaml,sys;yaml.safe_load(sys.stdin)' < static/openapi-schema.yml
