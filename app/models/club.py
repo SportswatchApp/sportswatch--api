@@ -34,7 +34,7 @@ class Club(models.Model):
             city=self.city,
             zip_code=self.zip_code,
             country=self.country,
-            created_date=self.created_date,
+            created_date=self.created_date.__str__(),
             members={'link': '/api/v1/club/' + str(self.id) + '/members/'}
         )._asdict()
 

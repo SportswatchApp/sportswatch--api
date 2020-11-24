@@ -73,7 +73,7 @@ class Member(models.Model):
                 'id': self.club_id,
                 'name': self.club.name
             },
-            date_joined=self.date_joined,
+            date_joined=self.date_joined.__str__(),
             user=self.user.__dto__(),
             is_trainee=self.is_trainee(),
             is_coach=self.is_coach(),
@@ -91,7 +91,7 @@ class Member(models.Model):
                 'id': self.club_id,
                 'name': self.club.name
             },
-            date_joined=self.date_joined,
+            date_joined=self.date_joined.__str__(),
             user={'id': self.user.id},
             is_trainee=self.is_trainee(),
             is_coach=self.is_coach(),
@@ -104,7 +104,9 @@ class Member(models.Model):
 
     @staticmethod
     def __dtolist__(members):
-        return [m.__dto__() for m in members]
+        return {
+            'members': [m.__dto__() for m in members]
+        }
 
     class Meta:
         unique_together = ('user', 'club',)

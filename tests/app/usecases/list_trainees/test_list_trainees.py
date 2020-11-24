@@ -100,7 +100,7 @@ class TestListTrainees(UseCaseTestCase):
         })
         self.run_use_case()
         actual = self.get_query_set()
-        self.assertCountEqual([trainee.__dto__()], actual)
+        self.assertCountEqual({'trainees': [trainee.__dto__()]}, actual)
 
     def test_can_search_by_email_inside_trainees(self):
         trainees = self._create_trainees(self.member.club, 4)
@@ -116,7 +116,7 @@ class TestListTrainees(UseCaseTestCase):
         })
         self.run_use_case()
         actual = self.get_query_set()
-        self.assertCountEqual([trainee.__dto__()], actual)
+        self.assertCountEqual({'trainees': [trainee.__dto__()]}, actual)
 
     def test_can_search_by_exact_id_inside_trainees(self):
         trainees = self._create_trainees(self.member.club, 4)
@@ -131,7 +131,7 @@ class TestListTrainees(UseCaseTestCase):
         })
         self.run_use_case()
         actual = self.get_query_set()
-        self.assertCountEqual([trainee.__dto__()], actual)
+        self.assertCountEqual({'trainees': [trainee.__dto__()]}, actual)
 
     def test_can_order_by_num_registrations(self):
         trainees = self._create_trainees_with_times(5)
@@ -143,7 +143,7 @@ class TestListTrainees(UseCaseTestCase):
         self.run_use_case()
         actual = self.get_query_set()
         trainees.sort(reverse=False, key=lambda t: t.time_set.count())
-        self.assertEqual(Trainee.__dtolist__(trainees), list(actual))
+        self.assertEqual(Trainee.__dtolist__(trainees), actual)
 
     def create_request(self, fields):
         request = list_trainees.Request().from_dict(fields)
