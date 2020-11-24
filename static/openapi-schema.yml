@@ -390,6 +390,7 @@ paths:
                 properties:
                   clubs:
                     type: array
+                qweda
 
 
   /api/v1/club/{club_id}/apply/:
