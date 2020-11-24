@@ -392,7 +392,6 @@ paths:
                     type: array
 
 
-
   /api/v1/club/{club_id}/apply/:
     post:
       operationId: Apply membership to club
