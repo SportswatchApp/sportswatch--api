@@ -63,6 +63,6 @@ class User(AbstractUser):
             email=self.email,
             first_name=self.first_name,
             last_name=self.last_name,
-            date_joined=self.date_joined,
+            date_joined=self.date_joined.__str__(),
             members=[m.__dto_no_user__() for m in self.members()]
         )._asdict()
