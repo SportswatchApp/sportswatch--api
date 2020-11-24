@@ -104,7 +104,9 @@ class Member(models.Model):
 
     @staticmethod
     def __dtolist__(members):
-        return [m.__dto__() for m in members]
+        return {
+            'members': [m.__dto__() for m in members]
+        }
 
     class Meta:
         unique_together = ('user', 'club',)

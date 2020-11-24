@@ -90,7 +90,7 @@ components:
           example: Nordjylland
         zip_code:
           type: string
-          example: 9000
+          example: "9000"
         city:
           type: string
           example: Aalborg
@@ -351,7 +351,7 @@ paths:
                   example: Nordjylland
                 zip_code:
                   type: string
-                  example: 9000
+                  example: "9000"
                 city:
                   type: string
                   example: Aalborg
@@ -465,7 +465,7 @@ paths:
             application/json:
               schema:
                 properties:
-                  clubs:
+                  members:
                     type: array
         '403':
           description: You do not have permission to see these members
@@ -571,6 +571,8 @@ paths:
           description: Accepted
         '403':
           description: Forbidden
+        '404':
+          description: Member not found
 
 
 
@@ -608,7 +610,7 @@ paths:
             application/json:
               schema:
                 properties:
-                  clubs:
+                  trainees:
                     type: array
 
 

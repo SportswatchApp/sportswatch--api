@@ -22,4 +22,4 @@ class Accept:
             member.save()
             listener.handle_success({'detail': 'Membership accepted'})
         except Member.DoesNotExist:
-            listener.handle_member_not_found()
+            listener.handle_not_found()
