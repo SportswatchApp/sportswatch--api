@@ -12,10 +12,12 @@ class Create:
 
         fields = request.body
         name = fields['name']
+        club_id = fields['club_id']
 
         try:
             category = Category.objects.create(
-                name=name
+                name=name,
+                club_id=club_id
             )
         except IntegrityError as e:
             _str = str(e)
