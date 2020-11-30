@@ -27,6 +27,8 @@ class Create:
                 listener.handle_database_error()
             return
 
+        listener.handle_success(category.__dto__())
+
         
 
 
