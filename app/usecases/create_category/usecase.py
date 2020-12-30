@@ -14,12 +14,14 @@ class Create:
         name = fields['name']
         club_id = fields['club_id']
 
-        if not Club.objects.filter(id=club_id).exists():
-            listener.handle_club_does_not_exist()
+        try:
+            club = Club.objects.get(pk=club_id)
+        except Club.DoesNotExist:
+            listener.handle_club_not_found()
             return
 
-        if not request.user.is_member_of(club_id):
-            listener.handle_user_must_be_member_of_club()
+        if not request.user.admin_of(club):
+            listener.handle_user_must_be_admin_of_club()
             return
 
         if Category.objects.filter(name=name, club_id=club_id).exists():

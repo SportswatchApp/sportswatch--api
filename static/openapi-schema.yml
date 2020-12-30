@@ -179,6 +179,25 @@ components:
           example: false
 
 
+    Category:
+      properties:
+        id:
+          type: int
+          example: 1
+        club:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            name:
+              type: string
+              example: GymClub
+        name:
+          type: string
+          example: 'name'
+
+
 paths:
   /api/v1/login/:
     post:
@@ -653,3 +672,41 @@ paths:
           description: You do not have permission to register times for this trainee
         '404':
           description: Category not found || Trainee not found
+
+  /api/v1/category/:
+    post:
+      operationId: Create category
+      description: Creates a new category to a club
+      tags:
+        - Category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                club_id:
+                  type: integer
+                  example: 1
+                  description: Identifier of club
+                name:
+                  type: string
+                  example: 'name'
+                  description: The name of the category
+              required:
+                - club_id
+                - name
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '403':
+          description: You must be admin of the club you are trying to create a category for
+        '409':
+          description: Category already exist
+        '404':
+          description: Club not found

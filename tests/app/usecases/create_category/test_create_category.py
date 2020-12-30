@@ -1,6 +1,6 @@
 from abc import ABC
 
-from app.models import Club, Category, User, Member
+from app.models import Club, Category, User, Member, Admin
 from app.usecases import create_category
 from tests.app.usecases.testcase import UseCaseTestCase
 
@@ -29,7 +29,7 @@ class TestCreateCategory(UseCaseTestCase):
 
         self.request = self.create_request({
             'name': 'category',
-            'club_id': 1
+            'club_id': club.id
         })
 
         self.request.user = User.objects.create_user(
@@ -37,11 +37,15 @@ class TestCreateCategory(UseCaseTestCase):
             password='qwerty'
         )
 
-        Member.objects.create(
+        member = Member.objects.create(
             user=self.request.user,
-            club=club
+            club=club,
+            active=True
         )
 
+        member.set_admin(True)
+
+        self.assertTrue(self.request.user.admin_of(club))
         self.run_use_case()
         self.assertOnlyCalled(self.listener.handle_success)
         category = Category.objects.first()
@@ -69,10 +73,13 @@ class TestCreateCategory(UseCaseTestCase):
             username='user',
             password='qwerty'
         )
-        Member.objects.create(
+        member = Member.objects.create(
             user=self.request.user,
-            club=club
+            club=club,
+            active=True
         )
+
+        member.set_admin(True)
 
         self.run_use_case()
         self.assertOnlyCalled(self.listener.handle_already_exist)
@@ -83,9 +90,9 @@ class TestCreateCategory(UseCaseTestCase):
             'club_id': 1
         })
         self.run_use_case()
-        self.assertOnlyCalled(self.listener.handle_club_does_not_exist)
+        self.assertOnlyCalled(self.listener.handle_club_not_found)
 
-    def test_when_user_is_not_a_member_of_the_club(self):
+    def test_when_user_is_not_a_admin_of_the_club(self):
         club = Club.objects.create(**{
             'name': 'Club',
             'region': 'North',
@@ -105,7 +112,7 @@ class TestCreateCategory(UseCaseTestCase):
         )
 
         self.run_use_case()
-        self.assertOnlyCalled(self.listener.handle_user_must_be_member_of_club)
+        self.assertOnlyCalled(self.listener.handle_user_must_be_admin_of_club)
 
     def create_request(self, fields):
         return create_category.Request().from_dict(fields)
