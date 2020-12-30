@@ -1,5 +1,6 @@
 from django.urls import path
 
+from app.endpoints.category.create import CreateCategoryEndPoint
 from app.endpoints.club.apply import ApplyMembershipView
 from app.endpoints.club.create import CreateClubEndpoint
 from app.endpoints.club.list import ListClubsEndpoints
@@ -42,4 +43,9 @@ urlpatterns += [
 # Time
 urlpatterns += [
     path('time/', CreateTimeEndpoint.as_view(), name='create new time')
+]
+
+# Categories
+urlpatterns += [
+    path('category/', CreateCategoryEndPoint.as_view(), name='create new category')
 ]

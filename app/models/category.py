@@ -20,4 +20,4 @@ class Category(models.Model):
         return Category.DTO(
             name=self.name,
             club=self.club.__dto__()
-        )
+        )._asdict()
