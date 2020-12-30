@@ -54,6 +54,9 @@ class User(AbstractUser):
         else:
             return self.member_set.filter(club=club).exists()
 
+    def is_trusted_by(self, trainee):
+        return trainee.member.club.trusted_users.filter(pk=self.pk).exists()
+
     def member(self, club):
         return self.member_set.filter(club=club).first()
 
