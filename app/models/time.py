@@ -36,3 +36,10 @@ class Time(models.Model):
             reported_by={'id': self.reported_by.id},
             created_date=self.created_date.__str__()
         )._asdict()
+
+    @staticmethod
+    def __dtolist__(times):
+        return {'times': [t.__dto__() for t in times]}
+
+    class Meta:
+        ordering = ['-created_date']
