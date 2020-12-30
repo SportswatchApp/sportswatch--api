@@ -1,6 +1,7 @@
 from django.urls import path
 
 from app.endpoints.category.create import CreateCategoryEndPoint
+from app.endpoints.category.list import ListCategoriesEndpoint
 from app.endpoints.club.apply import ApplyMembershipView
 from app.endpoints.club.create import CreateClubEndpoint
 from app.endpoints.club.list import ListClubsEndpoints
@@ -47,5 +48,6 @@ urlpatterns += [
 
 # Categories
 urlpatterns += [
-    path('category/', CreateCategoryEndPoint.as_view(), name='create new category')
+    path('category/', CreateCategoryEndPoint.as_view(), name='create new category'),
+    path('trainees/<int:trainee_id>/categories/', ListCategoriesEndpoint.as_view(), name='list categories')
 ]

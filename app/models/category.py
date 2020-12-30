@@ -21,3 +21,9 @@ class Category(models.Model):
             name=self.name,
             club=self.club.__dto__()
         )._asdict()
+
+    @staticmethod
+    def __dtolist__(categories):
+        return {
+            'categories': [c.__dto__() for c in categories]
+        }
