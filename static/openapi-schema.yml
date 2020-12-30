@@ -632,6 +632,44 @@ paths:
                     type: array
 
 
+
+  /api/v1/trainees/:trainee_id/times/:
+    get:
+      operationId: List times
+      description: Get a list of all times for a given trainee
+      tags:
+        - Trainee
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          schema:
+            type: string
+            example: Token <Token>
+          required: true
+        - in: path
+          name: trainee_id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: Identifier of the trainee
+
+      responses:
+        '200':
+          description: Times
+          content:
+            application/json:
+              schema:
+                properties:
+                  trainees:
+                    type: array
+        '403':
+          description: You do not have access to list times for this trainee
+        '404':
+          description: Trainee not found
+
+
   /api/v1/time/:
     post:
       operationId: Create time
@@ -672,6 +710,8 @@ paths:
           description: You do not have permission to register times for this trainee
         '404':
           description: Category not found || Trainee not found
+
+
 
   /api/v1/category/:
     post:
