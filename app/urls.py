@@ -43,3 +43,8 @@ urlpatterns += [
 urlpatterns += [
     path('time/', CreateTimeEndpoint.as_view(), name='create new time')
 ]
+
+# Category
+urlpatterns += [
+
+]
