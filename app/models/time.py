@@ -34,5 +34,5 @@ class Time(models.Model):
             category={'id': self.category.id, 'name': self.category.name},
             time=self.time,
             reported_by={'id': self.reported_by.id},
-            created_date=self.created_date
+            created_date=self.created_date.__str__()
         )._asdict()

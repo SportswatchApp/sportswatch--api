@@ -6,8 +6,7 @@ class UserEnvironment(ObjectEnvironment):
 
     def create(self, **kwargs):
         update = self.provider.kwargs(self._default(), kwargs)
-        user = User(**update)
-        user.save()
+        user = User.objects.create_user(**update)
         return user
 
     def _default(self):

@@ -14,7 +14,7 @@ class Trainee(models.Model):
 
     @staticmethod
     def __dtolist__(trainees):
-        return [t.__dto__() for t in trainees]
+        return {'trainees': [t.__dto__() for t in trainees]}
 
     def __dto__(self):
         return Trainee.DTO(

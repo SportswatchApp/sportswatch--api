@@ -31,6 +31,8 @@ class Request:
         try:
             if decoded:
                 _dict = json.loads(decoded)
+                if not _dict:
+                    _dict = {}
             else:
                 _dict = {}
             if extras:

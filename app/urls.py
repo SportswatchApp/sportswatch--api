@@ -1,6 +1,7 @@
 from django.urls import path
 
 from app.endpoints.category.create import CreateCategoryEndPoint
+from app.endpoints.club.apply import ApplyMembershipView
 from app.endpoints.club.create import CreateClubEndpoint
 from app.endpoints.club.list import ListClubsEndpoints
 from app.endpoints.member.accept import AcceptMembershipEndpoint
@@ -25,7 +26,8 @@ urlpatterns += [
     path('club/', CreateClubEndpoint.as_view(), name='create new club'),
     path('club/<int:club_id>/members/', ListMembersEndpoint.as_view(), name='list club members'),
     path('club/<int:club_id>/members/<int:user_id>/', PutMemberEndpoint.as_view(), name='put member to club'),
-    path('clubs/', ListClubsEndpoints.as_view(), name='list clubs endpoint')
+    path('clubs/', ListClubsEndpoints.as_view(), name='list clubs endpoint'),
+    path('club/<int:club_id>/apply/', ApplyMembershipView.as_view(), name='apply membership for club'),
 ]
 
 # Members
