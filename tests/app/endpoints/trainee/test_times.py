@@ -2,7 +2,7 @@ from app.models import Time
 from tests.app.endpoints.testcase import EndpointTestCase
 
 
-class TestGetTraineeTimesEndpoint(EndpointTestCase):
+class TestListTraineeTimesEndpoint(EndpointTestCase):
 
     def setUp(self) -> None:
         super().setUp()

@@ -1,5 +1,5 @@
 from parameterized import parameterized
-from app.usecases import get_times
+from app.usecases import list_times
 from tests.app.usecases.testcase import UseCaseTestCase
 
 
@@ -71,9 +71,9 @@ class TestGetTimesUseCase(UseCaseTestCase):
         self.assertOnlyCalled(self.listener.handle_forbidden)
 
     def create_request(self, fields):
-        request = get_times.Request().from_dict(fields)
+        request = list_times.Request().from_dict(fields)
         request.user = self.user
         return request
 
     def run_use_case(self):
-        get_times.Get.get(self.request, self.listener)
+        list_times.List.list(self.request, self.listener)

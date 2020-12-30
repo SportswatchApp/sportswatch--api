@@ -1,10 +1,10 @@
 from app.models import Trainee, Time
 
 
-class Get:
+class List:
 
     @staticmethod
-    def get(request, listener):
+    def list(request, listener):
         fields = request.body
         user = request.user
         trainee_id = fields['trainee_id']
