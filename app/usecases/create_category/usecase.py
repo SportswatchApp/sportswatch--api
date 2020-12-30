@@ -18,6 +18,10 @@ class Create:
             listener.handle_club_does_not_exist()
             return
 
+        if not request.user.is_member_of(club_id):
+            listener.handle_user_must_be_member_of_club()
+            return
+
         if Category.objects.filter(name=name, club_id=club_id).exists():
             listener.handle_already_exist()
             return
