@@ -85,7 +85,7 @@ class TestCreateCategory(UseCaseTestCase):
         self.run_use_case()
         self.assertOnlyCalled(self.listener.handle_club_does_not_exist)
 
-    def test_when_user_is_not_a_member(self):
+    def test_when_user_is_not_a_member_of_the_club(self):
         club = Club.objects.create(**{
             'name': 'Club',
             'region': 'North',
