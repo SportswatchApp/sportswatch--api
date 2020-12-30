@@ -10,6 +10,6 @@ class CreateCategoryEndPoint(AuthMixin):
         listener = create_category.Listener()
         create_category.Create.create(_request, listener)
         return Response(
-            request,
-            listener
+            request=request,
+            listener=listener
         )

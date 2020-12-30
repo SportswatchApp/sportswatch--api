@@ -1,5 +1,5 @@
 from django.db import IntegrityError
-from app.models import Category
+from app.models import Category, Club
 
 
 class Create:
@@ -14,17 +14,21 @@ class Create:
         name = fields['name']
         club_id = fields['club_id']
 
+        if not Club.objects.filter(id=club_id).exists():
+            listener.handle_club_does_not_exist()
+            return
+
+        if Category.objects.filter(name=name, club_id=club_id).exists():
+            listener.handle_already_exist()
+            return
+
         try:
             category = Category.objects.create(
                 name=name,
                 club_id=club_id
             )
         except IntegrityError as e:
-            _str = str(e)
-            if 'constraint failed' in _str:
-                listener.handle_already_exist()
-            else:
-                listener.handle_database_error()
+            listener.handle_database_error(str(e))
             return
 
         listener.handle_success(category.__dto__())
