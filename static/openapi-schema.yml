@@ -698,7 +698,7 @@ paths:
                 - club_id
                 - name
       responses:
-        '201':
+        '200':
           description: Created
           content:
             application/json:
@@ -710,3 +710,21 @@ paths:
           description: Category already exist
         '404':
           description: Club not found
+
+  /api/v1/trainees/{trainee_id}/categories/:
+    get:
+      operationId: Get categories
+        description: Get all categories for a given trainee
+        tags:
+          - Category
+        requestBody:
+          required: false
+      responses:
+        '200':
+          description: Categories for given trainee
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '404':
+          description: Trainee not found || No categories

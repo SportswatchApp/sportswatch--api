@@ -9,6 +9,6 @@ class ListCategoriesEndpoint(AuthMixin):
         listener = list_categories.Listener()
         list_categories.List.list(listener, request, trainee_id)
         return Response(
-            request,
-            listener
+            request=request,
+            listener=listener
         )
