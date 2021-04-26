@@ -65,7 +65,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://test.sportswatchapp.dk",
     "https://sportswatchapp.dk",
     "https://api.sportswatchapp.dk",
-    "https://www.test.sportswatchapp.dk"
+    "https://www.test.sportswatchapp.dk",
     "http://localhost:3000"
 ]
 
